@@ -27,13 +27,39 @@ main {
 .grid-view div.card.ui {
   margin: 1.25rem;
 }
-/*
-.main-img {
-  display: block;
-  border-radius: 100%;
-  margin: 0 auto;
-} */
 
 header h1 {
   text-align: center;
+  margin-top: 5%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 2%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.character-card {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2% auto;
+  background-color: cornsilk;
+  /* padding: 2%; */
+  border-radius: 8px;
+}
+
+
+
+nav {
+  display: flex;
+  width: 80%;
+  margin: 2% auto;
+  justify-content: center;
+
 }
