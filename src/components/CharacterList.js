@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
+import SearchForm from './SearchForm.js';
 
 // export default function CharacterList() {
 //   // TODO: Add useState to track data from useEffect
@@ -19,12 +20,13 @@ import { Route, Link } from 'react-router-dom';
 // }
 
 const CharacterList = props => {
-  const [characters, setCharacters] = useState({})
+  const [characters, setCharacters] = useState([])
   useEffect(() => {
       axios
         .get('https://rickandmortyapi.com/api/character')
         .then(response => {
-          setCharacters(response.data);
+          console.log(response.data.results);
+          setCharacters(response.data.results);
         })
         .catch(error => {
           console.error('Server Error', error);
@@ -32,26 +34,31 @@ const CharacterList = props => {
     
   }, []);
 
-const arrayCharacters = Array.from(characters);
-console.log(arrayCharacters);
+  // const arrayCharacters = Array.from(characters);
+  // console.log(arrayCharacters);
   
   return (
-    <div className="character-list">
-      {arrayCharacters.map(movie => (
-        <Link to={`/character/${movie.id}`} key={movie.id}>
-          <CharacterDetails key={movie.id} movie={movie} />
-        </Link>
-      ))}
-      
-    </div>
-  );
-}
-
-function CharacterDetails ({character}) {
-  return (
-    <Route render={(props) => 
-      <CharacterCard {...props} character={character} id={character.id} />} 
-    />
+    <section className="character-list">
+      <SearchForm />
+      {characters.map(character => {
+        return (
+          <div className="character-results">
+            <CharacterCard
+              key={character.id}
+              name={character.name}
+              species={character.species}
+              status={character.status}
+              gender={character.gender}
+              image={character.image}
+              location={character.location.name}
+              origin={character.origin.name}
+            />
+          </div>
+            );
+          }
+        )  
+      }
+    </section>
   );
 }
 
